@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+	<meta charset="UTF-8">
+	<title>OneTimeFlix</title>
+	<link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+	<video width="1360" height="768" controls>
+		<source src="/video" type="video/mp4">
+		{% if srt_filename %}
+			<track src="/subtitle" kind="subtitles" label="{{srt_filename}}" default>
+		{% endif %}
+	</video>
+</body>
+</html>

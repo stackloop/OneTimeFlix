@@ -2,6 +2,7 @@ from flask import Flask, request, Response, render_template, send_file, abort
 from argparse import ArgumentParser, ArgumentTypeError
 from io import BytesIO
 from pathlib import Path
+import charset_normalizer
 import sys
 import os
 
@@ -30,7 +31,9 @@ def index():
 def get_vtt_string(srt_filepath):
     vtt = ['WEBVTT\n\n']
 
-    with open(srt_filepath, encoding='utf-8') as srt:
+    encoding = charset_normalizer.from_path(srt_filepath).best().encoding
+
+    with open(srt_filepath, encoding=encoding) as srt:
         is_empty = True
         for line in srt:
             stripped = line.strip()

@@ -51,7 +51,7 @@ def get_vtt_string(srt_filepath):
 def main():
     def file_ext(ext):
         def file(path):
-            path = Path(path)
+            path = Path(path).resolve()
 
             if not path.is_file():
                 raise ArgumentTypeError(f"Invalid {ext} path.")
